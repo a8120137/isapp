@@ -14,8 +14,13 @@
             doSelect();
         }
 
+        // string = prompt("ここに入力");
+
         async function doSelect() {
-            var sql = 'select * from Tweets where tweet like "% ${input} %"';
+
+            var tweetcont = document.getElementById('tf').value;
+
+            var sql = 'select * from Tweets where tweet like "%${tweetcony}%"';
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
@@ -36,6 +41,7 @@
     <button onclick="button1Pressed()">X</button>
     <hr>
     <p id="result">xxxx</p>
+    検索内容:<input id="tf" type="textfield">
 </body>
 
 </html>
