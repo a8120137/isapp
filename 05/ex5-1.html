@@ -20,7 +20,8 @@
 
             var tweetcont = document.getElementById('tf').value;
 
-            var sql = 'select * from Tweets where tweet like "%${tweetcony}%"';
+            var sql = `select * from Tweets where tweet  like "%${tweetcont}%" order by time desc `;
+
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
@@ -38,10 +39,12 @@
 
 <body>
     <h1>Tweets</h1>
+
+    検索内容:<input id="tf" type="textfield">
     <button onclick="button1Pressed()">X</button>
     <hr>
     <p id="result">xxxx</p>
-    検索内容:<input id="tf" type="textfield">
+
 </body>
 
 </html>
