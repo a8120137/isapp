@@ -10,7 +10,11 @@
     <script type="text/javascript" src="../osql.js"></script>
 
     <script>
+        var x;
+
         $().ready(function () {
+            x = 0;
+            setInterval(doCount, 1000);
             doDisplay();
         });
 
@@ -45,6 +49,15 @@
             html = html + '</ul>';
             document.getElementById('result').innerHTML = html;
         }
+
+        async function doCount() {
+            x++;
+            // document.getElementById("count").innerHTML = x;
+            if (x % 2 == 0) {
+                doDisplay();
+            }
+        }
+
     </script>
 
 </head>
@@ -58,6 +71,7 @@
     <button onclick="button1Pressed()">tweet</button>
     <p id="tweetResult"></p>
     <hr>
+    <p id="count"></p>
     <p id="result"></p>
 </body>
 
