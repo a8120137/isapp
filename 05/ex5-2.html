@@ -23,6 +23,7 @@
             console.log(objects);
 
             document.getElementById('result').innerHTML = "tweetしました";
+            document.getElementById('tf2').value = "";
         }
     </script>
 
@@ -33,7 +34,7 @@
     <br>
     名前:<input id="tf1" value="名無し" type="textfield">
     <br>
-    tweet:<input id="tf2" type="textfield">
+    tweet:<input id="tf2" value="" type="textfield">
     <button onclick="button1Pressed()">tweet</button>
     <br>
     <p id="result"></p>
