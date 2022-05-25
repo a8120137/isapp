@@ -18,19 +18,30 @@
 
         async function doSelect() {
 
-            var tweetcont = document.getElementById('tf').value;
 
-            var sql = `select * from Tweets where tweet  like "%${tweetcont}%" order by time desc `;
+            var sql = `select * from Tweets order by time desc limit 20`;
 
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
-            html = html + '<ul>';
+            // html = html + '<ul>';
+            // for (var i = 0; i < objects.length; i++) {
+            //     var object = objects[i];
+            //     html = html + '<li>' + object.id + " , " + object.name + " ," + object.time + " ," + object.tweet + '</li>';
+            // }
+            // html = html + '</ul>';
+
+            html = html + `<table border="1">`;
             for (var i = 0; i < objects.length; i++) {
                 var object = objects[i];
-                html = html + '<li>' + object.id + " , " + object.name + " ," + object.time + " ," + object.tweet + '</li>';
+                html = html + `<tr>`;
+                html = html + `<td>` + object.id + `</td>`;
+                html = html + `<td>` + object.name + `</td>`;
+                html = html + `<td>` + object.time + `</td>`;
+                html = html + `<td>` + object.tweet + `</td>`;
+                html = html + `</tr>`
             }
-            html = html + '</ul>';
+            html = html + `</table>`;
             document.getElementById('result').innerHTML = html;
         }
     </script>
@@ -40,7 +51,6 @@
 <body>
     <h1>Tweets</h1>
 
-    検索内容:<input id="tf" type="textfield">
     <button onclick="button1Pressed()">X</button>
     <hr>
     <p id="result">xxxx</p>
