@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../settings.js"></script>
+    <script type="text/javascript" src="../osql.js"></script>
+
+    <script>
+        var x;
+
+        $().ready(function () {
+            x = 0;
+            setInterval(doCount, 1000);
+            doDisplay();
+            // var username = ;
+            document.getElementById('tf1').value = osql.getParam('userid');
+        });
+
+        function button1Pressed() {
+            doInsert();
+        }
+
+        async function doInsert() {
+
+            var userid = document.getElementById('tf1').value;
+            var tweet = document.getElementById('tf2').value;
+
+            var sql1 = `insert into Tweets (name, tweet, time) values("${userid}", "${tweet}", now());`;
+            var objects = await osql.connect(sql1);
+            console.log(objects);
+
+            document.getElementById('tweetResult').innerHTML = "tweetしました";
+            document.getElementById('tf2').value = "";
+
+        }
+
+        async function doDisplay() {
+            var sql2 = `select * from Tweets order by time desc limit 20`;
+
+            var objects = await osql.connect(sql2);
+            console.log(objects);
+            var html = '';
+            html = html + '<ul>';
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                html = html + '<li>' + object.id + " , " + object.name + " ," + object.time + " ," + object.tweet + '</li>';
+            }
+            html = html + '</ul>';
+            document.getElementById('result').innerHTML = html;
+        }
+
+        async function doCount() {
+            x++;
+            // document.getElementById("count").innerHTML = x;
+            if (x % 2 == 0) {
+                doDisplay();
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <h1>Tweets</h1>
+    <br>
+    名前:<input id="tf1" value="" type="textfield">
+    <br>
+    tweet:<input id="tf2" value="" type="textfield">
+    <button onclick="button1Pressed()">tweet</button>
+    <p id="tweetResult"></p>
+    <hr>
+    <p id="count"></p>
+    <p id="result"></p>
+</body>
+
+</html>

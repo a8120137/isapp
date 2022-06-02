@@ -26,6 +26,12 @@
 
         }
 
+        function buttonPressed2() {
+            var name = sessionStorage.getItem("userid");
+            location.href = "tweet.html?userid=" + name;
+
+        }
+
 
     </script>
 
@@ -36,6 +42,8 @@
     <p id="welcome">ようこそxxさん</p>
     <hr>
     <button onclick="buttonPressed()">ユーザ情報変更</button>
+
+    <button onclick="buttonPressed2()">Tweet</button>
 
 
 
